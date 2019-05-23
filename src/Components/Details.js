@@ -170,8 +170,12 @@ class Details extends Component {
                                                     )}
                                                 </Slider>
                                             </div>
-                                            <div className="col">Site Web : <a href={movie.homepage}>{movie.homepage}</a></div>
                                         </div>
+                                        {movie.homepage &&
+                                            <div className="row">
+                                                <div className="col">Site Web : <a href={movie.homepage}>{movie.homepage}</a></div>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                                 <hr />
