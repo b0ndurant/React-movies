@@ -71,7 +71,7 @@ class Details extends Component {
                 this.setState({
                     videos: data,
                 });
-                console.log(this.state.videos)
+                console.log('videos :', this.state.videos)
             });
     }
 
@@ -157,7 +157,7 @@ class Details extends Component {
                                                             <div className="col" key={index}>
                                                                 <div className="card">
                                                                     {cast.profile_path === null ?
-                                                                        <img className="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" alt="available"/> :
+                                                                        <img className="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" alt="available" /> :
                                                                         <img className="card-img-top" src={`https://image.tmdb.org/t/p/w185/${cast.profile_path}`} alt={cast.name} />
                                                                     }
                                                                     <div className="card text-center">
@@ -184,17 +184,23 @@ class Details extends Component {
                                     </div>
                                 </div>
                                 <hr />
-                                <h2 className="text-center mb-4">Bande annonce</h2>
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <h5 className="text-center">{videos.results[0].name}</h5>
-                                        <YouTube videoId={videos.results[0].key} opts={{ width: '100%', }} />
-                                    </div>
-                                    <div className="col-md-6">
-                                        <h5 className="text-center">{videos.results[1].name}</h5>
-                                        <YouTube videoId={videos.results[1].key} opts={{ width: '100%' }} />
-                                    </div>
-                                </div>
+                                {videos.results[0] &&
+                                    <>
+                                        <h2 className="text-center mb-4">Bande annonce</h2>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <h5 className="text-center">{videos.results[0].name}</h5>
+                                                <YouTube videoId={videos.results[0].key} opts={{ width: '100%', }} />
+                                            </div>
+                                            {videos.results[1] &&
+                                                <div className="col-md-6">
+                                                    <h5 className="text-center">{videos.results[1].name}</h5>
+                                                    <YouTube videoId={videos.results[1].key} opts={{ width: '100%' }} />
+                                                </div>
+                                            }
+                                        </div>
+                                    </>
+                                }
                                 <button className="btn btn-primary" onClick={this.goBack}>Revenir en arriere</button>
                             </div>
                         </div>
