@@ -9,7 +9,7 @@ const Router = () => {
         <BrowserRouter>
             <Switch>
                 <Route path="/" component={MoviesOfMonth} exact strict/>
-                <Route path="/page/:pageIndex" component={MoviesOfMonth} exact />
+                <Route path="/page/:pageIndex" component={MoviesOfMonth} exact strict />
                 <Route path="/movie/:id" component={Details} />
             </Switch>
         </BrowserRouter>

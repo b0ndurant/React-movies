@@ -29,9 +29,11 @@ class MoviesOfMonth extends Component {
 
     componentDidMount() {
         window.onpopstate = function (event) {
+            console.log('w')
             window.location.reload();
         };
         this.getMovies()
+        console.log('cp')
     }
 
     getMovies = () => {
@@ -72,11 +74,11 @@ class MoviesOfMonth extends Component {
                         </MDBCol>
                     ))}
                 </MDBRow>
-                <MDBRow>
-                    <MDBCol>
+                <div className="row justify-content-center">
+                    <div className="col-md-4 text-center">
                         <Pagination onChange={this.onChange} current={parseInt(this.state.currentPage)} total={this.state.totalPages * 10} />
-                    </MDBCol>
-                </MDBRow>
+                    </div>
+                </div>
             </MDBContainer>
         );
     }
