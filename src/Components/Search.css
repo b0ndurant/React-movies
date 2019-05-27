@@ -1,0 +1,12 @@
+.result {
+    border: 1px solid;
+    background-color: gray;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    font-weight: bold
+}
+
+h1 {
+    margin-top: 80px;
+}
