@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Details from "./Details";
-import MoviesOfMonth from "./MoviesOfMonth";
+import movieDetails from "./MovieDetails";
+import Movies from "./Movies";
+import MoviesCurrently from "./MoviesCurrently";
+import Search from "./Search";
+import Navbar from "./Navbar";
 
-const Router = () => {
-    return (
-        <BrowserRouter>
-            <Switch>
-                <Route path="/" component={MoviesOfMonth} exact strict/>
-                <Route path="/page/:pageIndex" component={MoviesOfMonth} exact strict />
-                <Route path="/movie/:id" component={Details} />
-            </Switch>
-        </BrowserRouter>
-    )
+class Router extends Component {
+
+    render() {
+        return (
+            <BrowserRouter>
+                <Navbar />
+                <Switch>
+                    <Route exact path="/" component={Movies} />
+                    <Route path="/page/:pageIndex" component={Movies} />
+                    <Route exact path="/films-actuellement-au-cinema" component={MoviesCurrently} />
+                    <Route exact path="/films-actuellement-au-cinema/:pageIndex" component={MoviesCurrently} />
+                    <Route path="/search/:title/:pageIndex" component={Search} />
+                    <Route path="/movie/:id" component={movieDetails} />
+                </Switch>
+            </BrowserRouter>
+        )
+    }
 }
 
 export default Router
