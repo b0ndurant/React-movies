@@ -67,9 +67,8 @@ class Movies extends Component {
     }
 
     render() {
-        console.log('render')
         return (
-            <MDBContainer className="mt-5">
+            <MDBContainer>
                 <h1 className="text-center">Films</h1>
                 <MDBRow className="mt-5">
                     {this.state.movies.map((movie, index) => (
