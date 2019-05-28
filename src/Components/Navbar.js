@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import {
-    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse, MDBFormInline,
-} from "mdbreact";
 import { Link, withRouter } from 'react-router-dom';
 
 
 class Navbar extends Component {
 
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            moreSearch: true,
+        }
+    }
 
     submitForm = (e) => {
         const value = e.target.movieName.value;
@@ -16,33 +18,32 @@ class Navbar extends Component {
         window.location.reload();
     }
 
+    moreSearch = () => {
+        this.setState({
+            moreSearch: !this.state.moreSearch,
+        })
+    }
+
     render() {
         return (
-            <MDBNavbar color="indigo" dark expand="md" fixed="top">
-                <MDBNavbarBrand>
-                    <Link to="/"><strong className="white-text">Home</strong></Link>
-                </MDBNavbarBrand>
-                <MDBNavbarToggler />
-                <MDBCollapse navbar>
-                    <MDBNavbarNav left>
-                        <MDBNavItem active>
-                            <Link to="/films-actuellement-au-cinema" className="white-text">Films au cinéma</Link>
-                        </MDBNavItem>
-                    </MDBNavbarNav>
-                    <MDBNavbarNav right>
-                        <MDBNavItem>
-                            <MDBFormInline onSubmit={this.submitForm} waves>
-                                <div className="input-group mb-2">
-                                    <div className="input-group-prepend">
-                                        <div className="input-group-text"><i className="fas fa-search"></i></div>
-                                    </div>
-                                    <input type="text" className="form-control" name="movieName" placeholder="Rechercher votre film" />
-                                </div>
-                            </MDBFormInline>
-                        </MDBNavItem>
-                    </MDBNavbarNav>
-                </MDBCollapse>
-            </MDBNavbar >
+            <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor: "#e3f2fd"}}>
+            <Link to="/" className="navbar-brand">Home</Link>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+        
+            <div className="collapse navbar-collapse" id="navbarColor03">
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                <Link to="/films-actuellement-au-cinema" className="nav-link">Film au cinéma</Link>
+                </li>
+              </ul>
+              <form className="form-inline" onSubmit={this.submitForm}>
+                <input className="form-control mr-sm-2" type="search" name="movieName" placeholder="Rechercher votre film" aria-label="Search" />
+                <button className="btn btn-outline-primary my-2 my-sm-0" type="submit">Rechercher</button>
+              </form>
+            </div>
+          </nav>
         );
     }
 }
