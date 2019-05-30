@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { MDBMask, MDBView, MDBRow, MDBCol } from 'mdbreact';
 import { Link } from 'react-router-dom';
+import localeInfo from 'rc-pagination/lib/locale/fr_FR';
 import Pagination from 'rc-pagination';
 
 import 'rc-pagination/assets/index.css';
@@ -20,22 +21,19 @@ class Search extends Component {
         }
     }
 
-    submitForm = (e) => {
-        const value = e.target.movieName.value;
-        e.preventDefault();
-        this.getMovies(value)
-    }
-
     componentDidMount() {
-        window.onpopstate = function (event) {
-            window.location.reload();
-        };
         this.getMovies(this.props.match.params.title)
     }
 
-    onChange = async (page) => {
+    componentWillReceiveProps = (nextProps)=> {
+        if (nextProps.location.pathname !== this.props.location.pathname) {
+            window.location.reload();
+        }
+    }
+
+    onChange = (page) => {
         const title = this.props.match.params.title;
-        await this.setState({
+        this.setState({
             currentPage: page,
         });
         const target = `/search/${title}/${page}`;
@@ -61,9 +59,9 @@ class Search extends Component {
             });
     }
 
-    render() { 
-        return ( 
-            <div className="container">
+    render() {
+        return (
+            <div className="container mt-5">
                 <h1 className="text-center">Resultat trouvée pour <span className="result">{this.props.match.params.title}</span></h1>
                 <MDBRow className="mt-5">
                     {this.state.movies.map((movie, index) => (
@@ -83,13 +81,19 @@ class Search extends Component {
                     ))}
                 </MDBRow>
                 <div className="row justify-content-center">
-                    <div className="col-md-4 text-center">
-                        <Pagination onChange={this.onChange} current={parseInt(this.state.currentPage)} total={this.state.totalPages * 10} />
+                    <div className="col-md-auto">
+                        <Pagination
+                            showQuickJumper
+                            onChange={this.onChange}
+                            current={parseInt(this.state.currentPage)}
+                            total={this.state.totalPages * 10}
+                            locale={localeInfo}
+                        />
                     </div>
                 </div>
             </div>
-         );
+        );
     }
 }
- 
+
 export default Search;

@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#root, .rc-pagination-options-quick-jumper {
+  background-color: midnightblue;
+  color: white
+}
+
+.rc-pagination {
+  color: black;
+}
+
+.overlay {
+  border: 2px solid rgb(227,242,253);
+  border-radius: 10px;
+}

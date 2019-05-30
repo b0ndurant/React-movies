@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import 'moment/locale/fr';
 import { Parallax } from 'react-parallax';
 import YouTube from 'react-youtube';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import Slider from "react-slick";
+import 'moment/locale/fr';
 import 'react-circular-progressbar/dist/styles.css';
 import './MovieDetails.css';
 
@@ -39,7 +39,6 @@ class MovieDetails extends Component {
                     castings: data,
                 });
             });
-        console.log('cast :', this.state.castings)
     }
 
     getMovie = async () => {
@@ -55,9 +54,7 @@ class MovieDetails extends Component {
                 this.setState({
                     movie: data,
                 });
-                console.log('movie :', this.state.movie)
             });
-        //console.log(this.props.history.goBack())
     }
 
     getVideos = () => {
@@ -71,7 +68,6 @@ class MovieDetails extends Component {
                 this.setState({
                     videos: data,
                 });
-                console.log('videos :', this.state.videos)
             });
     }
 
@@ -96,7 +92,7 @@ class MovieDetails extends Component {
             <>
                 {movie.length !== 0 && castings.length !== 0 && videos.length !== 0 &&
                     <Parallax
-                        bgImage={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                        bgImage={`https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`}
                         bgImageAlt={movie.title}
                         strength={700}
                     >

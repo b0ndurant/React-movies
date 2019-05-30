@@ -9,14 +9,15 @@ import Navbar from "./Navbar";
 
 class Router extends Component {
 
+
     render() {
         return (
             <BrowserRouter>
                 <Navbar />
                 <Switch>
-                    <Route exact path="/" component={Movies} />
-                    <Route path="/page/:pageIndex" component={Movies} />
-                    <Route exact path="/films-actuellement-au-cinema" component={MoviesCurrently} />
+                    <Route exact path="/" component={Movies} strict />
+                    <Route exact path="/page/:pageIndex" component={Movies} />
+                    <Route exact path="/films-actuellement-au-cinema" component={MoviesCurrently}  />
                     <Route exact path="/films-actuellement-au-cinema/:pageIndex" component={MoviesCurrently} />
                     <Route path="/search/:title/:pageIndex" component={Search} />
                     <Route path="/movie/:id" component={movieDetails} />

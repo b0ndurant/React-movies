@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MDBMask, MDBView, MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import { Link } from 'react-router-dom';
 import Pagination from 'rc-pagination';
+import localeInfo from 'rc-pagination/lib/locale/fr_FR';
 import 'rc-pagination/assets/index.css';
 import './Movies.css';
 
@@ -16,7 +17,6 @@ class Movies extends Component {
             totalPages: null,
             currentPage: this.props.match.params.pageIndex || 1,
         }
-        console.log('const')
     }
 
     onChange = async (page) => {
@@ -38,16 +38,17 @@ class Movies extends Component {
         })
     }
 
-    componentDidMount() {
-        window.onpopstate = function (event) {
+    componentWillReceiveProps = (nextProps)=> {
+        if (nextProps.location.pathname === '/') {
             window.location.reload();
-        };
+        }
+    }
+
+    componentDidMount() {
+        // window.onpopstate = function (event) {
+        //     window.location.reload();
+        // };
         this.getMovies()
-        let today = new Date();
-        let dd = today.getDate();
-        let mm = (today.getMonth() + 1) <10 ? '0'+(today.getMonth() + 1) : (today.getMonth() + 1) ;
-        let yyyy = today.getFullYear();
-        console.log(yyyy+'-'+mm+'-'+dd)
     }
 
     getMovies = () => {
@@ -68,7 +69,7 @@ class Movies extends Component {
 
     render() {
         return (
-            <MDBContainer>
+            <MDBContainer className="mt-5">
                 <h1 className="text-center">Films</h1>
                 <MDBRow className="mt-5">
                     {this.state.movies.map((movie, index) => (
@@ -88,8 +89,14 @@ class Movies extends Component {
                     ))}
                 </MDBRow>
                 <div className="row justify-content-center">
-                    <div className="col-md-4 text-center">
-                        <Pagination onChange={this.onChange} current={parseInt(this.state.currentPage)} total={this.state.totalPages * 10} />
+                    <div className="col-md-auto">
+                        <Pagination
+                            showQuickJumper
+                            onChange={this.onChange}
+                            current={parseInt(this.state.currentPage)}
+                            total={this.state.totalPages * 10 > 10000 ? 10000 : this.state.totalPages * 10 }
+                            locale={localeInfo}
+                        />
                     </div>
                 </div>
             </MDBContainer>

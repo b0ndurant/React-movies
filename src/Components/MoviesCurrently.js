@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { MDBMask, MDBView, MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import { Link } from 'react-router-dom';
+import localeInfo from 'rc-pagination/lib/locale/fr_FR';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 
@@ -16,10 +17,13 @@ class MoviesCurrently extends Component {
         }
     }
 
-    componentDidMount() {
-        window.onpopstate = function (event) {
+    componentWillReceiveProps = (nextProps)=> {
+        if (nextProps.location.pathname === '/films-actuellement-au-cinema') {
             window.location.reload();
-        };
+        }
+    }
+
+    componentDidMount() {
         this.getMoviesCurrently()
     }
 
@@ -49,6 +53,7 @@ class MoviesCurrently extends Component {
         });
         this.getMoviesCurrently()
     }
+    
     render() { 
         return (
             <MDBContainer className="mt-5">
@@ -71,8 +76,14 @@ class MoviesCurrently extends Component {
                     ))}
                 </MDBRow>
                 <div className="row justify-content-center">
-                    <div className="col-md-5 text-center">
-                        <Pagination onChange={this.onChange} current={parseInt(this.state.currentPage)} total={this.state.totalPages * 10} />
+                    <div className="col-md-auto">
+                    <Pagination
+                            showQuickJumper
+                            onChange={this.onChange}
+                            current={parseInt(this.state.currentPage)}
+                            total={this.state.totalPages * 10}
+                            locale={localeInfo}
+                        />
                     </div>
                 </div>
             </MDBContainer>
