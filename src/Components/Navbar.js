@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Link, withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
-
+import './navbar.css'
 
 class Navbar extends Component {
 
@@ -14,7 +14,7 @@ class Navbar extends Component {
   render() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: "#e3f2fd" }}>
-          <Link to="/" className="navbar-brand">Home</Link>
+          <NavLink to="/" className="navbar-brand">Home</NavLink>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -22,7 +22,7 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navbarColor03">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link to="/films-actuellement-au-cinema" className="nav-link"> Films au cinéma</Link>
+                <NavLink to="/films-actuellement-au-cinema" className="nav-link"  activeClassName="active"> Films au cinéma</NavLink>
               </li>
             </ul>
             <div>
