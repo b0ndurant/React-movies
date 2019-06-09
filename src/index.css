@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+#root {
+  padding-top: 60px;
+}
+
 #root, .rc-pagination-options-quick-jumper {
   background-color: midnightblue;
   color: white
